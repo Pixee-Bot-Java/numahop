@@ -3,6 +3,7 @@ package fr.progilone.pgcn.service.storage;
 import static fr.progilone.pgcn.service.storage.BinaryStorageManager.Metadatas;
 
 import fr.progilone.pgcn.exception.PgcnTechnicalException;
+import io.github.pixee.security.BoundedLineReader;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -245,7 +246,7 @@ public class ExifToolService {
 
                 String line;
                 final StringBuilder sb = new StringBuilder();
-                while ((line = br.readLine()) != null) {
+                while ((line = BoundedLineReader.readLine(br, 5_000_000)) != null) {
                     sb.append(line);
                 }
                 final String result = new String(sb);
