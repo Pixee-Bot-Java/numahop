@@ -1,6 +1,7 @@
 package fr.progilone.pgcn.web.rest;
 
 import fr.progilone.pgcn.exception.PgcnTechnicalException;
+import io.github.pixee.security.Newlines;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +22,7 @@ public abstract class AbstractRestController {
 
     protected void writeResponseHeaderForDownload(final HttpServletResponse response, final String contentType, final Integer contentLength, final String filename) {
         response.setContentType(contentType);
-        response.setHeader("Content-Disposition", "attachment; filename=" + filename);
+        response.setHeader("Content-Disposition", Newlines.stripAll("attachment; filename=" + filename));
         response.setStatus(HttpServletResponse.SC_OK);
         response.setHeader("Cache-Control", "must-revalidate");
 
