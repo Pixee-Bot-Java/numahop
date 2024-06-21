@@ -8,6 +8,7 @@ import fr.progilone.pgcn.repository.user.UserRepository;
 import fr.progilone.pgcn.security.SecurityUtils;
 import fr.progilone.pgcn.service.util.DefaultFileFormats;
 import fr.progilone.pgcn.service.util.ImageUtils;
+import io.github.pixee.security.Filenames;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -464,6 +465,6 @@ public class FileStorageManager {
      * @return
      */
     public File getImportFile(final MultipartFile multipartFile, final String targetDir) {
-        return new File(targetDir, String.format("%s-%s-%s", SecurityUtils.getCurrentLogin(), System.currentTimeMillis(), multipartFile.getOriginalFilename()));
+        return new File(targetDir, String.format("%s-%s-%s", SecurityUtils.getCurrentLogin(), System.currentTimeMillis(), Filenames.toSimpleFileName(multipartFile.getOriginalFilename())));
     }
 }
