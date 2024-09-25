@@ -1,5 +1,6 @@
 package fr.progilone.pgcn.web.filter;
 
+import io.github.pixee.security.Newlines;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
@@ -43,8 +44,8 @@ public class CachingHttpHeadersFilter implements Filter {
         final HttpServletResponse httpResponse = (HttpServletResponse) response;
 
         httpResponse.setHeader("Cache-Control",
-                               "max-age=" + CACHE_TIME_TO_LIVE
-                                                + ", public");
+                               Newlines.stripAll("max-age=" + CACHE_TIME_TO_LIVE
+                                                + ", public"));
         httpResponse.setHeader("Pragma", "cache");
 
         // Setting Expires header, for proxy caching
