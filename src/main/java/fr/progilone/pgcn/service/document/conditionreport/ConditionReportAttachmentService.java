@@ -7,6 +7,7 @@ import fr.progilone.pgcn.domain.document.conditionreport.ConditionReportAttachme
 import fr.progilone.pgcn.repository.document.conditionreport.ConditionReportAttachmentRepository;
 import fr.progilone.pgcn.repository.document.conditionreport.ConditionReportRepository;
 import fr.progilone.pgcn.service.storage.FileStorageManager;
+import io.github.pixee.security.Filenames;
 import jakarta.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
@@ -100,7 +101,7 @@ public class ConditionReportAttachmentService {
             final ConditionReportAttachment attachment = new ConditionReportAttachment();
             attachment.setReport(report);
             attachment.setFileSize(file.getSize());
-            attachment.setOriginalFilename(new File(file.getOriginalFilename()).getName());
+            attachment.setOriginalFilename(new File(Filenames.toSimpleFileName(file.getOriginalFilename())).getName());
             LOG.debug("Téléversement de la pièce jointe {}", attachment.getOriginalFilename());
 
             final ConditionReportAttachment savedAttachment = conditionReportAttachmentRepository.save(attachment);

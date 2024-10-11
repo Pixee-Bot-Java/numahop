@@ -16,6 +16,7 @@ import fr.progilone.pgcn.service.storage.FileStorageManager;
 import fr.progilone.pgcn.service.util.transaction.TransactionService;
 import fr.progilone.pgcn.service.util.transaction.TransactionalJobRunner;
 import fr.progilone.pgcn.web.websocket.WebsocketService;
+import io.github.pixee.security.Filenames;
 import jakarta.annotation.PostConstruct;
 import jakarta.xml.bind.UnmarshalException;
 import java.io.File;
@@ -621,6 +622,6 @@ public class ImportReportService {
     }
 
     private ImportReport.ImportedFile getImportedFile(final MultipartFile file) {
-        return new ImportReport.ImportedFile(new File(file.getOriginalFilename()).getName(), file.getSize());
+        return new ImportReport.ImportedFile(new File(Filenames.toSimpleFileName(file.getOriginalFilename())).getName(), file.getSize());
     }
 }
