@@ -1,6 +1,7 @@
 package fr.progilone.pgcn.service.storage;
 
 import fr.progilone.pgcn.exception.PgcnTechnicalException;
+import io.github.pixee.security.BoundedLineReader;
 import jakarta.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.File;
@@ -55,7 +56,7 @@ public class TesseractService {
 
                 String line;
                 final StringBuilder sb = new StringBuilder();
-                while ((line = br.readLine()) != null) {
+                while ((line = BoundedLineReader.readLine(br, 5_000_000)) != null) {
                     sb.append(line);
                 }
                 final String result = new String(sb);

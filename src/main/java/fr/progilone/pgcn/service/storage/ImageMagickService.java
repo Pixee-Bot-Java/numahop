@@ -6,6 +6,7 @@ import com.lowagie.text.pdf.PdfReader;
 import fr.progilone.pgcn.domain.administration.viewsformat.ViewsFormatConfiguration;
 import fr.progilone.pgcn.exception.PgcnTechnicalException;
 import fr.progilone.pgcn.service.util.DefaultFileFormats;
+import io.github.pixee.security.BoundedLineReader;
 import java.io.*;
 import java.lang.ProcessBuilder.Redirect;
 import java.nio.charset.StandardCharsets;
@@ -564,7 +565,7 @@ public class ImageMagickService {
 
                 String line;
                 final StringBuilder sb = new StringBuilder();
-                while ((line = br.readLine()) != null) {
+                while ((line = BoundedLineReader.readLine(br, 5_000_000)) != null) {
                     sb.append(line);
                 }
                 final String result = new String(sb);
