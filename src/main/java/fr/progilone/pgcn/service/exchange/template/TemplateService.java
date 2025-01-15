@@ -9,6 +9,7 @@ import fr.progilone.pgcn.exception.message.PgcnErrorCode;
 import fr.progilone.pgcn.exception.message.PgcnList;
 import fr.progilone.pgcn.repository.exchange.template.TemplateRepository;
 import fr.progilone.pgcn.service.storage.FileStorageManager;
+import io.github.pixee.security.Filenames;
 import jakarta.annotation.PostConstruct;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -140,7 +141,7 @@ public class TemplateService {
             // Suppression de l'ancien fichier
             deleteTemplateFile(dbTemplate);
             // Mise à jour du template
-            dbTemplate.setOriginalFilename(file.getOriginalFilename());
+            dbTemplate.setOriginalFilename(Filenames.toSimpleFileName(file.getOriginalFilename()));
             dbTemplate.setFileSize(file.getSize());
             final Template savedTemplate = templateRepository.save(dbTemplate);
 

@@ -14,6 +14,7 @@ import fr.progilone.pgcn.service.exchange.dc.ImportDcService;
 import fr.progilone.pgcn.service.exchange.ead.ImportEadService;
 import fr.progilone.pgcn.service.exchange.marc.ImportMarcService;
 import fr.progilone.pgcn.web.util.LibraryAccesssHelper;
+import io.github.pixee.security.Filenames;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -158,7 +159,7 @@ public class ImportController {
         final List<File> importFiles = new ArrayList<>();
 
         for (final MultipartFile file : files) {
-            final String fileName = new File(file.getOriginalFilename()).getName();
+            final String fileName = new File(Filenames.toSimpleFileName(file.getOriginalFilename())).getName();
 
             LOG.info("Préparation de l'import du fichier {} (format {}, encodage {}, taille {})", fileName, fileFormat, dataEncoding, file.getSize());
 
