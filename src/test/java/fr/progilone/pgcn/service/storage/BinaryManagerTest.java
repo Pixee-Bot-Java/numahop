@@ -1,5 +1,6 @@
 package fr.progilone.pgcn.service.storage;
 
+import java.nio.file.Files;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -289,10 +290,10 @@ public class BinaryManagerTest {
         master.setFormatConfiguration(getValidFormatConfiguration());
 
         // Generate Derived files
-        final File derivedTmpFile = File.createTempFile("create_", ".tmp");
+        final File derivedTmpFile = Files.createTempFile("create_", ".tmp").toFile();
         derivedTmpFile.deleteOnExit();
         assertEquals(0L, derivedTmpFile.length());
-        final File derivedTmpFile2 = File.createTempFile("create_", ".tmp");
+        final File derivedTmpFile2 = Files.createTempFile("create_", ".tmp").toFile();
         derivedTmpFile2.deleteOnExit();
         assertEquals(0L, derivedTmpFile2.length());
 

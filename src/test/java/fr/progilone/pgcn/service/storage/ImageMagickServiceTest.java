@@ -1,6 +1,7 @@
 package fr.progilone.pgcn.service.storage;
 
 import static fr.progilone.pgcn.service.storage.BinaryStorageManager.Metadatas;
+import java.nio.file.Files;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.lowagie.text.pdf.PdfReader;
@@ -67,7 +68,7 @@ public class ImageMagickServiceTest {
             if (sourceFile == null || !sourceFile.exists()) {
                 fail("Unable to load " + SRC_FILE);
             }
-            final File destTmpFile = File.createTempFile("create_", ".tmp");
+            final File destTmpFile = Files.createTempFile("create_", ".tmp").toFile();
             destTmpFile.deleteOnExit();
             assertTrue(destTmpFile.length() == 0L);
 
@@ -158,10 +159,10 @@ public class ImageMagickServiceTest {
             final List<File> destIMFiles = new ArrayList<>();
             final List<File> destImScalrFiles = new ArrayList<>();
             for (int i = 0; i < 500; i++) {
-                final File destTmpFileIM = File.createTempFile("create_", ".tmp");
+                final File destTmpFileIM = Files.createTempFile("create_", ".tmp").toFile();
                 destIMFiles.add(destTmpFileIM);
                 destTmpFileIM.deleteOnExit();
-                final File destTmpFileImgScalr = File.createTempFile("create_", ".tmp");
+                final File destTmpFileImgScalr = Files.createTempFile("create_", ".tmp").toFile();
                 destImScalrFiles.add(destTmpFileImgScalr);
                 destTmpFileImgScalr.deleteOnExit();
             }
